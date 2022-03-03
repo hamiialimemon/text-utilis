@@ -3,13 +3,8 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from matplotlib.pyplot import text
 
-
 def index(request):
     return render(request, 'index.html')
-
-    # return HttpResponse("Home")
-
-
 
 def analyze(request):
     #Get the text
@@ -31,7 +26,6 @@ def analyze(request):
                 analyzed = analyzed + char
         params = {'purpose':'Removed Punctuations', 'analyzed_text': analyzed}
         djtext = analyzed
-        # return render(request, 'analyze.html', params)
 
     if(fullcaps == "on"):
         analyzed = ""
@@ -39,7 +33,6 @@ def analyze(request):
             analyzed = analyzed + char.upper()
         params = {'purpose':'Changed to Uppercase', 'analyzed_text': analyzed}
         djtext = analyzed
-        # return render(request, 'analyze.html', params)
 
     if(newlineremover == 'on'):
         analyzed = ""
@@ -51,7 +44,6 @@ def analyze(request):
         print("pre",analyzed)
         params = {'purpose':'Removed New Lines', 'analyzed_text': analyzed}
         djtext = analyzed
-        # return render(request, 'analyze.html', params) 
     
     if(extraspaceremover == "on"):
         analyzed = ""
@@ -60,13 +52,11 @@ def analyze(request):
                 analyzed = analyzed + char
         params = {'purpose':'Extra Space Remover', 'analyzed_text': analyzed}
         djtext = analyzed
-        # return render(request, 'analyze.html', params) 
 
     if(charcount == 'on'):
         analyzed = len(djtext)
         params = {'purpose':'Count Number of Characters', 'analyzed_text': analyzed}
         djtext = analyzed
-        # return render(request, 'analyze.html', params)
     if(removepunc != "on" and newlineremover != "on" and fullcaps != "on" and extraspaceremover != "on" and charcount != "on"):
         return HttpResponse("Error")
 
